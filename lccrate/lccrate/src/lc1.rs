@@ -19,22 +19,18 @@
 
 /*sliding window will not work since numbers are not in order & although window is of 2,
 the window is not contigious
-
 When to Use Sliding Window?
-
 Use it when:
+- Problem involves subarrays / substrings
+- You need contiguous elements
 
-Problem involves subarrays / substrings
-You need contiguous elements
 Asked for:
 max/min sum
 longest/shortest substring
 count of valid windows
 
 sliding window will NOT work if the elements are not contiguous
-
 Now, if below vectors are sorted, then can use two pointers
-
 So this case we have to use hashmaps :)
 */
 
@@ -50,7 +46,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
                     pair.push(*v);
                 }
                 None => {
-                    println!("wtf");
+                    println!("unlikely!");
                 }
             }
         } else {
