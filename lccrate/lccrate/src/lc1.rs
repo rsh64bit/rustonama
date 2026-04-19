@@ -17,36 +17,29 @@
  * not use the same element twice.
 */
 
-/*sliding window will not work since numbers are not in order & although window is of 2,
-the window is not contigious
-When to Use Sliding Window?
-Use it when:
-- Problem involves subarrays / substrings
-- You need contiguous elements
-
-Asked for:
-max/min sum
-longest/shortest substring
-count of valid windows
-
-sliding window will NOT work if the elements are not contiguous
-Now, if below vectors are sorted, then can use two pointers
-So this case we have to use hashmaps :)
+/*
+Approach:
+- Sliding window does not apply because this is not a contiguous subarray problem.
+- Two pointers needs sorted input, which would lose original indices.
+- Use a hashmap to store seen number -> index, and check complement in O(1).
 */
 
-use std::collections::HashMap;
-pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+pub mod dev {
+    use std::collections::HashMap;
+
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     let mut sum_hash = HashMap::new();
     let mut pair: Vec<i32> = Vec::new();
     for (i, val) in nums.iter().enumerate() {
-        if sum_hash.contains_key(&(target - val)) {
+        if sum_hash.contains_key
+        (&(target - val)) {
             match sum_hash.get(&(target - val)) {
                 Some(v) => {
                     pair.push(i.try_into().unwrap());
                     pair.push(*v);
                 }
                 None => {
-                    println!("unlikely!");
+                    println!("wtf");
                 }
             }
         } else {
@@ -54,4 +47,26 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         }
     }
     pair
+}
+}
+
+pub mod ai {
+    use std::collections::HashMap;
+
+    // copilot improvements
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+    let mut seen: HashMap<i32, usize> = HashMap::new();
+
+    for (i, &value) in nums.iter().enumerate() {
+        let needed = target - value;
+
+        if let Some(&j) = seen.get(&needed) {
+            return vec![j as i32, i as i32];
+        }
+
+        seen.insert(value, i);
+    }
+
+    Vec::new()
+}
 }
